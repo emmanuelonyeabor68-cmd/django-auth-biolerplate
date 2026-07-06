@@ -4,7 +4,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 import os
 load_dotenv()
-
+from pathlib import Path
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -22,7 +22,7 @@ DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '127.0.0.1,localhost').split(',')
 
-CSFR_TRUSTED_ORIGIN = []
+CSFR_TRUSTED_ORIGIN = os.environ.get('CSFR_TRUSTED_ORIGIN')
 
 # Application definition
 
@@ -163,7 +163,8 @@ DJOSER = {
     'PASSWORD_RESET_CONFIRM_URL': 'resetpassword/?uid={uid}&token={token}',
     'USERNAME_RESET_CONFIRM_URL': 'email/reset/confirm/{uid}/{token}',
     'ACTIVATION_URL': 'activate/{uid}/{token}',   # frontend handles this URL
-    'DOMAIN':'127.0.0.1:3000',
+    'DOMAIN':os.environ.get('FRONTEND_URL', '127.0.0.1:3000'),
+    'SITE_NAME': os.environ.get('SITE_NAME', 'Auth App'),
     'SEND_ACTIVATION_EMAIL': True,                # triggers verification email
     'SERIALIZERS': {},
 }
@@ -187,9 +188,11 @@ DEFAULT_FROM_EMAIL = 'onboarding@resend.dev'
 # EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
 # EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
 
-CORS_ALLOWED_ORIGINS = [
-    'http://127.0.0.1:3000',
-]
+CORS_ALLOWED_ORIGINS = os.environ.get(
+    'CORS_ALLOWED_ORIGINS',
+    'http://127.0.0.1:3000'
+).split(',')
+
 
 CORS_ALLOW_CREDENTIALS = True
 
