@@ -9,7 +9,7 @@ class Command(BaseCommand):
         domain = os.environ.get("FRONTEND_URL", '127.0.0.1:3000')
         name = os.environ.get('SITE_NAME', 'Auth App')
         site = Site.objects.get(id=1)
-        site.domain = name
+        site.domain = domain
         site.name = name
         site.save()
         self.stdout.write(f'Site updated tp {domain}')
