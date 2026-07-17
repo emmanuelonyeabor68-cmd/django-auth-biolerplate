@@ -1,6 +1,11 @@
 from django.shortcuts import render
 
 # Create your views here.
+from pathlib import Path
+from dotenv import load_dotenv
+import os
+load_dotenv()
+
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -8,9 +13,36 @@ from rest_framework import status
 from django.contrib.auth import get_user_model
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.exceptions import TokenError
+from django.shortcuts import redirect
 
 User = get_user_model()
 
+def google_callback(request):
+    user = request.user
+
+    if not user.is_authenticated:
+        return redirect(f'{os.environ.get("FRONTEND_URL")}/login?error=auth_failed')
+
+    # generate JWT tokens
+    refresh = RefreshToken.for_user(user)
+    access_token = str(refresh.access_token)
+    refresh_token = str(refresh)
+
+    # redirect to React frontend with access token
+    frontend_url = os.environ.get('FRONTEND_URL', '127.0.0.1:3000')
+    response = redirect(f'https://{frontend_url}/dashboard?access={access_token}')
+
+    # set refresh token as httpOnly cookie
+    response.set_cookie(
+        key='refresh_token',
+        value=refresh_token,
+        httponly=True,
+        secure=True,
+        samesite=None,
+        max_age=7 * 24 * 60 * 60
+    )
+
+    return response
 
 class CustomLoginView(APIView):
     def post(self, request):
@@ -107,3 +139,5 @@ class CustomLogoutView(APIView):
         )
         response.delete_cookie('refresh_token')
         return response
+
+

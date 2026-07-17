@@ -12,4 +12,4 @@ class Command(BaseCommand):
         site.domain = domain
         site.name = name
         site.save()
-        self.stdout.write(f'Site updated tp {domain}')
+        self.stdout.write(f'Site updated to {domain}')
