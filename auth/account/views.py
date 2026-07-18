@@ -18,6 +18,9 @@ User = get_user_model()
 def issue_jwt_and_redirect(backend, user, response, *args, **kwargs):
     if not user:
         return
+    if not user.is_active:
+        user.is_active = True
+        user.save()    
     
     refresh = RefreshToken.for_user(user)
     access_token = str(refresh.access_token)
