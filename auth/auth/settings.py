@@ -198,7 +198,7 @@ CORS_ALLOW_CREDENTIALS = True
 SITE_ID = 1
 
 AUTHENTICATION_BACKENDS = (
-    'social_core.backends.google.Google0Auth2',
+    'social_core.backends.google_oauth2.Google0Auth2',
     'django.contrib.auth.backends.ModelBackends',
 )
 
