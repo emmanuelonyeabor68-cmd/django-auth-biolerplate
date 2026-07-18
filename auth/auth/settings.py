@@ -212,8 +212,8 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
 
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/api/auth/google/callback/'
 LOGIN_REDIRECT_URL = '/api/auth/google/callback/'
-SOCIAL_AUTH_URL_PREFIX = 'social-auth'
-LOIN_ERROR_URL = '/api/auth/login/error/'
+SOCIAL_AUTH_LOGIN_ERROR_URL = '/api/auth/login'
+LOGIN_URL = '/api/auth/login/'
 
 SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.social_details',
