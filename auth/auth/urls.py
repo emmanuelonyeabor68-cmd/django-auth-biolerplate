@@ -6,5 +6,5 @@ urlpatterns = [
     path('api/auth/', include('djoser.urls')),
     path('api/auth/', include('djoser.urls.jwt')),
     path('api/auth/', include('account.urls')),
-    path('social-auth', include('social_django.urls', namespace='social')),
+    path('social-auth/', include('social_django.urls', namespace='social')),
 ]
