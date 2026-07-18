@@ -15,22 +15,18 @@ from django.shortcuts import redirect
 
 User = get_user_model()
 
-def google_callback(request):
-    user = request.user
-
-    if not user.is_authenticated:
-        return redirect(f'{os.environ.get("FRONTEND_URL")}/login?error=auth_failed')
-
-    # generate JWT tokens
+def issue_jwt_and_redirect(backend, user, response, *args, **kwargs):
+    if not user:
+        return
+    
     refresh = RefreshToken.for_user(user)
     access_token = str(refresh.access_token)
     refresh_token = str(refresh)
 
-    # redirect to React frontend with access token
     frontend_url = os.environ.get('FRONTEND_URL', '127.0.0.1:3000')
-    response = redirect(f'https://{frontend_url}/dashboard?access={access_token}')
 
-    # set refresh token as httpOnly cookie
+    response = redirect(f'https://{frontend_url}/dashboard?access={access_token}')
+    
     response.set_cookie(
         key='refresh_token',
         value=refresh_token,
