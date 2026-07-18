@@ -198,8 +198,8 @@ CORS_ALLOW_CREDENTIALS = True
 SITE_ID = 1
 
 AUTHENTICATION_BACKENDS = (
-    'social_core.backends.google_oauth2.Google0Auth2',
-    'django.contrib.auth.backends.ModelBackends',
+    'social_core.backends.google.Google0Auth2',
+    'django.contrib.auth.backends.ModelBackend',
 )
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ.get('GOOGLE_CLIENT_ID')
