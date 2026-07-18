@@ -211,6 +211,8 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
 ]
 
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/api/auth/google/callback/'
+SOCIAL_AUTH_NEW_USER_REDIRECT_URL = '/api/auth/google/callback/'
+SOCIAL_AUTH_NEW_ASSOCIATION_REDIRECT_URL = '/api/auth/google/callback/'
 LOGIN_REDIRECT_URL = '/api/auth/google/callback/'
 SOCIAL_AUTH_LOGIN_ERROR_URL = '/api/auth/login'
 LOGIN_URL = '/api/auth/login/'
