@@ -210,8 +210,10 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
     'https://www.googleapis.com/auth/userinfo.profile',
 ]
 
-LOGIN_REDIRECT_URL = '/'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/api/auth/google/callback/'
+LOGIN_REDIRECT_URL = '/api/auth/google/callback/'
 SOCIAL_AUTH_URL_PREFIX = 'social-auth'
+LOIN_ERROR_URL = '/api/auth/login/error/'
 
 SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.social_details',
@@ -225,7 +227,6 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.user.user_details',
 )
 
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/api/auth/google/callback/'
 
 LOGGING = {
     'version': 1,
