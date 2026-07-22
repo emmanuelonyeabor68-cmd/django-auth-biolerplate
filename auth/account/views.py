@@ -35,7 +35,7 @@ def issue_jwt_and_redirect(backend, user, response, *args, **kwargs):
         value=refresh_token,
         httponly=True,
         secure=True,
-        samesite=None,
+        samesite='None',
         max_age=7 * 24 * 60 * 60
     )
 
