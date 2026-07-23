@@ -115,6 +115,3 @@ Start command: gunicorn auth.wsgi
 - DEBUG=False in production
 - Secret key in environment variable
 
-## Frontend Repository
-
-https://github.com/emmanuelonyeabor68-cmd/react_auth_frontend
